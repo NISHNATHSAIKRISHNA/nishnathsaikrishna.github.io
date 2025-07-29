@@ -16,16 +16,15 @@ body {
     color: var(--text-color);
 }
 
-/* --- NEW DESKTOP LAYOUT STYLES --- */
+/* --- DESKTOP LAYOUT STYLES --- */
 .site-wrapper {
     display: grid;
-    grid-template-columns: 1fr; /* Default for mobile */
+    grid-template-columns: 1fr;
 }
 
-/* This layout applies only to screens wider than 992px */
 @media (min-width: 992px) {
     .site-wrapper {
-        grid-template-columns: 1fr 1.5fr; /* Two columns for desktop */
+        grid-template-columns: 1fr 1.5fr;
         max-width: 1400px;
         margin: auto;
         gap: 2rem;
@@ -53,9 +52,20 @@ body {
     }
 }
 
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 2rem;
+    border: 3px solid #444;
+}
+
 .sidebar-title {
     font-size: 2.5rem;
     margin: 0;
+    text-align: center;
 }
 
 .sidebar-subtitle {
@@ -64,6 +74,7 @@ body {
     margin-bottom: 3rem;
     font-weight: 400;
     color: #ccc;
+    text-align: center;
 }
 
 .sidebar-nav {
@@ -92,6 +103,7 @@ body {
     padding-top: 2rem;
     font-size: 0.9rem;
     color: #888;
+    text-align: center;
 }
 
 /* --- MAIN CONTENT STYLES --- */
@@ -130,48 +142,59 @@ body {
     font-weight: 600;
 }
 
-/* Projects Grid */
-.projects-grid {
+/* --- NEW ACHIEVEMENTS SECTION STYLES --- */
+.achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
+    margin-top: 20px;
 }
 
-.project-item {
+.achievement-item a {
+    text-decoration: none; /* Removes underline from link */
+}
+
+.achievement-item {
     border: 1px solid #555;
-    padding: 20px;
     border-radius: 5px;
     background-color: #333;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-item h3 {
-    margin-top: 0;
-    color: var(--text-color);
+.achievement-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
 
-.project-item a {
-    color: #a0cff9;
-    text-decoration: none;
+.achievement-item img {
+    width: 100%;
+    border-radius: 3px;
+    display: block;
 }
 
-.project-item p {
+.achievement-item .achievement-title {
+    font-weight: 600;
+    margin-top: 10px;
     color: #ccc;
 }
 
+
 /* Contact Button */
-.contact-button {
+.button, .contact-button {
     display: inline-block;
     background: #a0cff9;
     color: #111;
     font-weight: 600;
-    padding: 12px 25px;
+    padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 15px;
     transition: opacity 0.3s;
 }
 
-.contact-button:hover {
+.button:hover, .contact-button:hover {
     opacity: 0.9;
 }
 
@@ -240,31 +263,56 @@ body {
 .skills-list li {
     margin-bottom: 0.5rem;
 }
-/* Add this to the bottom of style.css */
 
-.button {
-    display: inline-block;
-    background: #a0cff9;
-    color: #111;
-    font-weight: 600;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 15px;
-    transition: opacity 0.3s;
+/* --- RESPONSIVE STYLES --- */
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        height: auto;
+    }
+    .main-content {
+        padding: 0 2rem 2rem 2rem;
+    }
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* --- NEW ANIMATION STYLES --- */
+
+/* Preloader styles */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+    visibility: visible;
+    opacity: 1;
 }
 
-.button:hover {
-    opacity: 0.9;
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--secondary-color);
+    border-top-color: #a0cff9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
-/* Add this to the bottom of style.css */
 
-.profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* Makes the image circular */
-    object-fit: cover;   /* Prevents the image from stretching */
-    display: block;
-    margin: 0 auto 2rem; /* Centers the image and adds space below */
-    border: 3px solid #444;
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Class to hide preloader */
+.preloader-hidden {
+    opacity: 0;
+    visibility: hidden;
 }
